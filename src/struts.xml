@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="com.login" namespace="/111" extends="struts-default,json-default">
+		
+		<action name="login" class="com.ob.action.LoginClientAction" method="login">
+			<result name="SUCCESS">/success.jsp</result>
+			<result name="FAIL">/login.jsp</result>
+		</action>
+		
+		<action name="addInfo" class="com.ob.action.SubmitInfoAction" method="addInfo">
+			<result name="SUCCESS">/success.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+		
+		<action name="selectInfo" class="com.ob.action.SubmitInfoAction" method="selectInfo">
+			<result type="json">jsonstr</result>
+		</action>
+		
+		<action name="websiteInfo" class="com.ob.action.WebsiteAction" method="selectInfo">
+			<result type="json">jsonstr</result>
+		</action>
+		
+		<action name="dealInfo" class="com.ob.action.DealInfoAction" method="selectDealInfo">
+			<result type="json">jsonstr</result>
+		</action>
+		
+		<action name="menuInfo" class="com.ob.action.MenuInfoAction" method="selectMenuInfo">
+			<result type="json">jsonstr</result>
+		</action>
+			
+	</package>
+
+</struts>    
