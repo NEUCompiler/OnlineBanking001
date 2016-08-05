@@ -18,6 +18,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.ob.dao.ClientsubmitinfoDAO;
 import com.ob.model.Clientsubmitinfo;
 import com.ob.model.ClientsubmitinfoDate;
+import com.opensymphony.xwork2.ActionContext;
 
 public class ClientsubmitinfoDAOImpl implements ClientsubmitinfoDAO {
 	private static final Logger log = LoggerFactory
@@ -381,5 +382,126 @@ public class ClientsubmitinfoDAOImpl implements ClientsubmitinfoDAO {
 	public ClientsubmitinfoDAO getFromApplicationContext(
 			ApplicationContext ctx) {
 		return (ClientsubmitinfoDAO) ctx.getBean("ClientsubmitinfoDAO");
+	}
+	
+	public List sqlSelectGroupUser(String username, String password) throws Exception{
+		Session s=null;
+		String sql = "select groupName,rate,money from onlinebanking.groupaccount where groupUsername=? and groupPassword=?";
+		try{
+			s=getCurrentSession();
+			s.beginTransaction();
+			Query q=s.createSQLQuery(sql);
+			q.setString(0, username);
+			q.setString(1, password);
+			s.getTransaction().commit();	
+			List list = q.list();
+			
+			return list;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}finally{
+			if(s!=null){
+				s.close();
+			}
+		}
+	}
+	
+	public List sqlSelectGroup(int type) throws Exception{
+		Session s=null;
+		String sql="";
+		if(type==0)
+			sql = "select groupName from onlinebanking.groupaccount where type=?";
+		else
+			sql = "select groupName,groupUsername,rate,money from onlinebanking.groupaccount where type=?";
+		try{
+			s=getCurrentSession();
+			s.beginTransaction();
+			Query q=s.createSQLQuery(sql);
+			q.setInteger(0, type);
+			s.getTransaction().commit();	
+			List list = q.list();
+			
+			return list;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}finally{
+			if(s!=null){
+				s.close();
+			}
+		}
+	}
+	
+	public List sqlSelectGroup(String option) throws Exception{
+		Session s=null;
+		String sql="";
+		sql = "select groupName,groupUsername,rate,money from onlinebanking.groupaccount where groupName=? and type=1";
+		try{
+			s=getCurrentSession();
+			s.beginTransaction();
+			Query q=s.createSQLQuery(sql);
+			q.setString(0, option);
+			s.getTransaction().commit();	
+			List list = q.list();
+			
+			return list;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}finally{
+			if(s!=null){
+				s.close();
+			}
+		}
+	}
+	
+	public List sqlSelectGroupMember(String member) throws Exception{
+		Session s=null;
+		String sql="";
+		sql = "select groupName,groupUsername,money,rate from onlinebanking.groupaccount where groupUsername=? and type=1";
+		try{
+			s=getCurrentSession();
+			s.beginTransaction();
+			Query q=s.createSQLQuery(sql);
+			q.setString(0, member);
+			s.getTransaction().commit();	
+			List list = q.list();
+			
+			return list;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}finally{
+			if(s!=null){
+				s.close();
+			}
+		}
+	}
+	
+	public void sqlUpdateGroupMemberInfo(String groupName, String rate, String money) throws Exception{
+		String username = ActionContext.getContext().getSession().get("username")+"";
+		String sql="update onlinebanking.groupaccount SET groupName=?, rate=?, money=? where groupUsername=?";
+		float ratefloat= Float.parseFloat(rate);
+		float moneyfloat=Float.parseFloat(money);
+		Session s=null;
+		try{
+			s=getCurrentSession();
+			s.beginTransaction();
+			Query q=s.createSQLQuery(sql);
+			q.setString(0, groupName);
+			q.setFloat(1, ratefloat);
+			q.setFloat(2, moneyfloat);
+			q.setString(3, username);
+			q.executeUpdate();
+			s.getTransaction().commit();	
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}finally{
+			if(s!=null){
+				s.close();
+			}
+		}
 	}
 }

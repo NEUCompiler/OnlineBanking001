@@ -13,4 +13,9 @@ public interface ClientsubmitinfoService {
 	public String selectAddrInfo(String id) throws Exception;
 	public List selectDealInfo(String option);
 	public List selectMenuInfo(int parent);
+	public List selectGroupMemberInfo(String username, String password);
+	public List groupSelect(int type);
+	public List groupSelect(String option);
+	public List groupMemberSelect(String member);
+	public void updateGroupMemberInfo(String groupName, String rate, String money)  throws Exception;
 }

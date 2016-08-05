@@ -28,6 +28,30 @@
 		<action name="menuInfo" class="com.ob.action.MenuInfoAction" method="selectMenuInfo">
 			<result type="json">jsonstr</result>
 		</action>
+		
+		<action name="groupLogin" class="com.ob.action.GroupLoginAction" method="groupLogin">
+			<result type="json">jsonstr</result>
+		</action>
+		
+		<action name="selectGroupPar" class="com.ob.action.GroupSelectAction" method="groupParSelect">
+			<result type="json">jsonstr</result>
+		</action>
+		
+		<action name="selectGroupChi" class="com.ob.action.GroupSelectAction" method="groupChiSelect">
+			<result type="json">jsonstr</result>
+		</action>
+		
+		<action name="interest" class="com.ob.action.GroupSelectAction" method="groupMemberSelect">
+			<result type="json">jsonstr</result>
+		</action>
+		
+		<action name="back" class="com.ob.action.GroupManageAction" method="groupMemberBack">
+			<result type="json">jsonstr</result>
+		</action>
+		
+		<action name="correct" class="com.ob.action.GroupManageAction" method="groupMemberCorrect">
+			<result type="json">jsonstr</result>
+		</action>
 			
 	</package>
 

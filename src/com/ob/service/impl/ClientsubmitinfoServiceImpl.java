@@ -86,4 +86,53 @@ public class ClientsubmitinfoServiceImpl extends ActionSupport implements Client
 		}
 		return list;
 	}
+	
+	public List selectGroupMemberInfo(String username, String password){
+		ClientsubmitinfoDAOImpl dao = new ClientsubmitinfoDAOImpl();
+		List list = null;
+		try{
+			list = dao.sqlSelectGroupUser(username, password);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public List groupSelect(int type){
+		ClientsubmitinfoDAOImpl dao = new ClientsubmitinfoDAOImpl();
+		List list = null;
+		try{
+			list = dao.sqlSelectGroup(type);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public List groupSelect(String option){
+		ClientsubmitinfoDAOImpl dao = new ClientsubmitinfoDAOImpl();
+		List list = null;
+		try{
+			list = dao.sqlSelectGroup(option);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public List groupMemberSelect(String member){
+		ClientsubmitinfoDAOImpl dao = new ClientsubmitinfoDAOImpl();
+		List list = null;
+		try{
+			list = dao.sqlSelectGroupMember(member);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public void updateGroupMemberInfo(String groupName, String rate, String money) throws Exception{
+		ClientsubmitinfoDAOImpl dao = new ClientsubmitinfoDAOImpl();
+		dao.sqlUpdateGroupMemberInfo(groupName, rate, money);
+	}
 }
